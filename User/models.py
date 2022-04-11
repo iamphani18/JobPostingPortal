@@ -20,6 +20,7 @@ class Jobs(models.Model):
 
 class Searches(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    Jname_id = models.CharField(max_length=4, choices=(('A', 'Option1'), ('B', 'Option2'), ('C', 'Option3')), null=True)
    # j_name=models.CharField(Jobs, on_delete=models.CASCADE)
 
     class Meta:
