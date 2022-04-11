@@ -19,7 +19,7 @@ from User.views import Jobs_Page, home, login_page, register_page
 from User.urls import User_router
 
 urlpatterns = [
-    path('jobs/', Jobs_Page, name="addjob"),
+    path('blank', Jobs_Page, name="addjob"),
     path('', home, name="home"),
     path('admin/', admin.site.urls),
     path('register/', register_page, name="register"),

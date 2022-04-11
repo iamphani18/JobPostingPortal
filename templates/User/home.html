@@ -1,36 +1,38 @@
 {% extends 'base.html' %}
 {% block page %}
-HOME PAGE
 
 <h1> WElCOME TO JOB POSTING PORTAL</h1>
+<br> <br>
+<br> <br>
 <form action="" method="post">
     {% csrf_token %}
     {% for q in jobs %}
     <div class="form-check">
+        <h2>Job -</h2>
         <input class="form-check-input" type="radio" name="{{q.JobName}}" id="gridRadio1" value="A">
         <label class="form-check-label" for="gridRadio1">
-            {{ q.JobName }}
+            <h4>{{ q.JobName }}</h4>
         </label>
     </div>
     <div class=""form-check>
         <div class=""form-check>
-            <label class="form_check-label" for="jobs">
-                {{ q.Salary }}
+            <label  class="form_check-label" for="jobs">
+                <font face="Verdana">Salary - </font>{{ q.Salary }}
             </label>
         </div>
         <div class=""form-check>
             <label class="form_check-label" for="jobs">
-                {{ q.Experience }}
+                <font face="Verdana">Years of Experience - </font>{{ q.Experience }}
             </label>
         </div>
         <div class=""form-check>
             <label class="form_check-label" for="jobs">
-                {{ q.City }}
+               <font face="Verdana">City - </font>{{ q.City }}
             </label>
         </div>
         <div class=""form-check>
             <label class="form_check-label" for="jobs">
-                {{ q.Skills }}
+                <font face="Verdana">Skills Required -  </font>{{ q.Skills }}
             </label>
         </div>
     </div>
