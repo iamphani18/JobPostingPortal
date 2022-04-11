@@ -1,16 +1,14 @@
 from django.shortcuts import render
-from .forms import AddJobForm, LoginForm
+from .forms import AddJobForm
 from .models import Jobs
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
 from rest_framework.viewsets import ModelViewSet
 from .serializer import JobSerializer
 
 # Create your views here.
 def login_page(request):
-    if request.user.is_authenticated:
-        return redirect('/')
-    else:
         if request.method == "POST":
             print("I am here")
             uname = request.POST.get('username')
@@ -21,8 +19,27 @@ def login_page(request):
             if user_data:
                 login(request, user_data)
                 return redirect('/')
-        data = LoginForm()
-        return render(request, 'User/login.html', context={'form': data})
+        return render(request, 'login.html')
+
+def register_page(request):
+    if request.method == "POST":
+        uname = request.POST.get('username')
+        email = request.POST.get('email')
+        pwd1 = request.POST.get('password')
+        pwd2 = request.POST.get('password2')
+        if pwd1 != pwd2:
+            return HttpResponse('Invalid Password', status=400)
+        if User.objects.filter(username=uname):
+            return HttpResponse('Username Exist', status=400)
+        user_data = User.objects.create(
+            username = uname,
+            email = email,
+            password = pwd1
+        )
+        if user_data:
+            login(request, user_data)
+            return redirect('/')
+    return render(request, 'register.html')
 
 def logout_page(request):
     logout(request)
